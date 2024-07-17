@@ -1,0 +1,22 @@
+def get_number(input_string):
+    import re
+
+    test_str = re.search(r'[a-zA-Z]*(\d+(\.\d+)?)', input_string)
+    
+    if test_str:
+
+        number_str = test_str.group(1)
+        # 格式化字符串，保留两位小数，不四舍五入
+        if '.' in number_str:
+            integer_part, decimal_part = number_str.split('.')
+            formatted_number = f"{integer_part}.{decimal_part[:2]}"
+        else:
+            # 如果数字字符串中没有小数点，则补充两位小数
+            formatted_number = f"{number_str}.00"
+        return formatted_number
+    else:
+        return "0.00"  
+
+input_string = input("请输入字符串：")
+result = get_number(input_string)
+print(result)
